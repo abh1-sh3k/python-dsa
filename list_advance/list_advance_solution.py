@@ -53,3 +53,12 @@ class Solutions:
             else:
                 i += 1
         return diff_max
+
+    def stock_buy_and_sell(self, arr: list[int]) -> int:
+        """
+        alist = [[i,i+1] for i in range(n-1) if a[i]<a[i+1]]
+        return alist
+        """
+        # code here
+        alist = [[i, i + 1] for i in range(n - 1) if a[i] < a[i + 1]]
+        return alist
