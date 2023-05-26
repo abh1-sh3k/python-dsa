@@ -123,3 +123,19 @@ class Solutions:
             arr[i] *= -1
         z = self.kadane(arr)
         return x if y + z == 0 else max(x, y + z)
+
+    def arrange(self, arr: list[int], n: int) -> list[int]:
+        """
+        Given an array arr[] of size N where every element is in the range from 0 to n-1.
+        Rearrange the given array so that the transformed array arrT[i] becomes arr[arr[i]].
+        """
+        for i in range(n):
+            x = arr[i]
+            y = arr[x]
+            arr[i] = x + (y % n)*n
+            print(f"x:{x} y:{y}  arr[{i}]:{arr[i]}")
+        for i in range(n):
+            arr[i] //= n
+        return arr
+
+
