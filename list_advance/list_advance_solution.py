@@ -63,7 +63,7 @@ class Solutions:
         alist = [[i, i + 1] for i in range(n - 1) if a[i] < a[i + 1]]
         return alist
 
-    def trappingWater(self, arr:list, n:int)->int:
+    def trappingWater(self, arr: list[int], n: int) -> int:
         """
         function returns, how much water we can collect between blocks
         """
@@ -81,3 +81,19 @@ class Solutions:
         for i in range(1, n - 1):
             trapped_water = trapped_water + (min(right[i], left[i]) - arr[i])
         return trapped_water
+
+    def maxEvenOdd(self, arr: list[int], n: int) -> int:
+        """
+        You are given an array of size n. Find the maximum possible length of a subarray such that its elements are
+        arranged alternately either as even and odd or odd and even .
+        """
+        # returns: the maximum length
+        max_count = 0
+        count = 1
+        for i in range(1,n):
+            if arr[i] % 2 != arr[i - 1] % 2:
+                count += 1
+            else:
+                count = 1
+            max_count = max(max_count, count)
+        return max_count
