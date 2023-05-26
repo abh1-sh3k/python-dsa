@@ -90,10 +90,36 @@ class Solutions:
         # returns: the maximum length
         max_count = 0
         count = 1
-        for i in range(1,n):
+        for i in range(1, n):
             if arr[i] % 2 != arr[i - 1] % 2:
                 count += 1
             else:
                 count = 1
             max_count = max(max_count, count)
         return max_count
+
+    def kadane(self, nums: list[int]) -> int:
+        """
+        function that returns a maximum of a sub-array
+        """
+        sums = 0
+        maxi = nums[0]
+        for i in range(0, len(nums)):
+            sums += nums[i]
+            maxi = max(sums, maxi)
+            if sums < 0:
+                sums = 0
+        return maxi
+
+    def circularSubarraySum(self, arr: list[int], n: int) -> int:
+        """
+        Given an array arr[] of N integers arranged in a circular fashion.
+        Your task is to find the maximum contiguous subarray sum.
+        """
+        x = self.kadane(arr)
+        y = 0
+        for i in range(n):
+            y += arr[i]
+            arr[i] *= -1
+        z = self.kadane(arr)
+        return x if y + z == 0 else max(x, y + z)
