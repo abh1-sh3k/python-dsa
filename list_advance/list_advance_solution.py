@@ -62,3 +62,22 @@ class Solutions:
         # code here
         alist = [[i, i + 1] for i in range(n - 1) if a[i] < a[i + 1]]
         return alist
+
+    def trappingWater(self, arr:list, n:int)->int:
+        """
+        function returns, how much water we can collect between blocks
+        """
+        left = [0] * n
+        right = [0] * n
+
+        left[0] = arr[0]
+        for i in range(1, n):
+            left[i] = max(arr[i], left[i - 1])
+
+        right[n - 1] = arr[n - 1]
+        for i in range(n - 2, -1, -1):
+            right[i] = max(arr[i], right[i + 1])
+        trapped_water = 0
+        for i in range(1, n - 1):
+            trapped_water = trapped_water + (min(right[i], left[i]) - arr[i])
+        return trapped_water
