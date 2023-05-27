@@ -132,10 +132,28 @@ class Solutions:
         for i in range(n):
             x = arr[i]
             y = arr[x]
-            arr[i] = x + (y % n)*n
+            arr[i] = x + (y % n) * n
             print(f"x:{x} y:{y}  arr[{i}]:{arr[i]}")
         for i in range(n):
             arr[i] //= n
         return arr
 
+    def game(self, a: int, b: int) -> bool:
+        if 0 in [a, b]:
+            return False
 
+        if a > b:
+            t = a
+            a = b
+            b = t
+
+        k = b - a
+        d = 1 + 5 ** 0.5
+
+        d = d / 2
+        d = d * k
+
+        c = int(d)
+        print(f"c {c},d {d}, k {k}")
+        # Return answer
+        return 0 if a == c else 1
