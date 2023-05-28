@@ -157,3 +157,62 @@ class Solutions:
         print(f"c {c},d {d}, k {k}")
         # Return answer
         return 0 if a == c else 1
+
+    def missingNumber(self, arr: list[int], n: int) -> int:
+        """
+        find smallest positive missing number from the given array
+        """
+        if len(arr) == 1:
+            return 1
+        i = 0
+        while i < n:
+            if 0 < arr[i] <= n and arr[arr[i] - 1] != arr[i]:
+                arr[arr[i] - 1], arr[i] = arr[i], arr[arr[i] - 1]
+            else:
+                i += 1
+        for i in range(n):
+            if i + 1 != arr[i]:
+                return i + 1
+        return n + 1
+
+    def div_and_subt(self, N: int):
+        if N == 1:
+            return "Arya"
+        if N < 6:
+            return "Jon"
+
+        # make a dp array of size N+1
+        arr = [0] * (N + 1)
+
+        # Initialize the variable
+        i = 1
+
+        # If it's whose turn it is to win on that move, we'll do 1, otherwise 0
+
+        # for 1-5 Jon always win
+        while i < 6 and i <= N:
+            arr[i] = 1
+            i += 1
+
+        i = 6
+        while i <= N:
+            # Whosever turn will it be we will
+            # check if there is any move by
+            # performing, there is a chance for
+            # him to win, means if any
+            # arr[condition] = 0 then he will win
+            # for sure else not
+            if arr[i // 2] == 0 or arr[i // 4] == 0 or arr[i // 3] == 0 or arr[i // 5] == 0:
+                # Means the person doing the move can win through division
+                arr[i] = 1
+            elif arr[i - 2] == 0 or arr[i - 3] == 0 or arr[i - 4] == 0 or arr[i - 5] == 0:
+                # Means the person doing the move can win through subtraction
+                arr[i] = 1
+            else:
+                # Else other person will win
+                arr[i] = 0
+            print(arr)
+            i += 1
+
+        # If arr[N] is 1 then Jon win else Arya win
+        return "Jon" if (arr[N] == 1) else "Arya"
