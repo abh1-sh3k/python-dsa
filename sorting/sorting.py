@@ -59,3 +59,36 @@ class Sorting:
                 j -= 1
             self.arr[j + 1] = element
 
+    def merge_sort(self, left: int, right: int):
+        """
+        STABLE ALGORITHM
+        Divide, conquer and merge
+        """
+        if left < right:
+            mid = (left + right) // 2
+            self.merge_sort(left, mid)
+            self.merge_sort(mid + 1, right)
+            self.merge(left, mid, right)
+
+    def merge(self, low, mid, high):
+        left = self.arr[low:mid + 1]
+        right = self.arr[mid + 1:high+1]
+        i, j = 0, 0
+        k = low
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                self.arr[k] = left[i]
+                i += 1
+                k += 1
+            else:
+                self.arr[k] = right[j]
+                j += 1
+                k += 1
+        while i < len(left):
+            self.arr[k] = left[i]
+            i += 1
+            k += 1
+        while j < len(right):
+            self.arr[k] = right[j]
+            j += 1
+            k += 1
