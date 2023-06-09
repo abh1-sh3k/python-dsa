@@ -72,7 +72,7 @@ class Sorting:
 
     def merge(self, low, mid, high):
         left = self.arr[low:mid + 1]
-        right = self.arr[mid + 1:high+1]
+        right = self.arr[mid + 1:high + 1]
         i, j = 0, 0
         k = low
         while i < len(left) and j < len(right):
@@ -92,3 +92,37 @@ class Sorting:
             self.arr[k] = right[j]
             j += 1
             k += 1
+
+    @staticmethod
+    def union(a: list[int], b: list[int]):
+        """
+        union of two sorted list
+        prints non duplicated list
+        :param a: sorted list
+        :param b: sorted list
+        """
+        i, j = 0, 0
+        while i < len(a) and j < len(b):
+            if i > 0 and a[i] == a[i - 1]:
+                i += 1
+            elif j > 0 and b[j] == b[j - 1]:
+                j += 1
+            elif a[i] > b[j]:
+                print(b[j], end=" ")
+                j += 1
+            elif a[i] < b[j]:
+                print(a[i], end=" ")
+                i += 1
+            else:
+                print(a[i], end=" ")
+                i += 1
+                j += 1
+        while i < len(a):
+            if i >= 0 and a[i] != a[i - 1]:
+                print(a[i], end=" ")
+                i += 1
+        while j < len(b):
+            if j >= 0 and b[j] != b[j - 1]:
+                print(b[j], end=" ")
+                j += 1
+        print()
