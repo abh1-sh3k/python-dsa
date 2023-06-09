@@ -40,3 +40,22 @@ class Sorting:
                 if self.arr[min_index] > self.arr[j]:
                     min_index = j
             self.arr[min_index], self.arr[i] = self.arr[i], self.arr[min_index]
+
+    def insertion_sort(self):
+        """
+        STABLE
+        Treat First element as sorted and right of it unsorted
+        ---------------------
+           SORTED | UNSORTED
+        ---------------------
+        0       i-1,i     n-1
+        """
+        n = len(self.arr)
+        for i in range(1, n):
+            element = self.arr[i]
+            j = i - 1
+            while j >= 0 and element < self.arr[j]:
+                self.arr[j + 1] = self.arr[j]
+                j -= 1
+            self.arr[j + 1] = element
+
