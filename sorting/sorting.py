@@ -126,3 +126,23 @@ class Sorting:
                 print(b[j], end=" ")
                 j += 1
         print()
+
+    @staticmethod
+    def intersection(a: list[int], b: list[int]):
+        """
+        intersection of two sorted arrays
+        returns same non duplicated arrays in ascending order
+        """
+        i, j = 0, 0
+        while i < len(a) and j < len(b):
+            if a[i] == a[i - 1] and i > 0:
+                i += 1
+                continue
+            elif a[i] < b[j]:
+                i += 1
+            elif a[i] > b[j]:
+                j += 1
+            else:
+                print(a[i], end=" ")
+                i += 1
+                j += 1
