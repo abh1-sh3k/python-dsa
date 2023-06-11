@@ -4,6 +4,7 @@ class Sorting:
     Takes an array as input
     """
     res = 0
+
     def __init__(self, arr: list[int]):
         """
         initialize an array
@@ -156,7 +157,7 @@ class Sorting:
             mid = (left + right) // 2
             res += self.count_inv(left, mid)
             res += self.count_inv(mid + 1, right)
-            res+=self.count_inv_merge(left, mid, right)
+            res += self.count_inv_merge(left, mid, right)
         return res
 
     def count_inv_merge(self, low, mid, high):
@@ -182,3 +183,18 @@ class Sorting:
             k += 1
             j += 1
         return res
+
+    def lomuto(self, low, high):
+        """
+        takes first element as a pivot
+        pivot is returned.
+        we know pivot will get placed at it's correct position
+        """
+        pivot = self.arr[high]
+        i = low - 1
+        for j in range(len(self.arr)):
+            if self.arr[j] < pivot:
+                i += 1
+                self.arr[i], self.arr[j] = self.arr[j], self.arr[i]
+        self.arr[i + 1], self.arr[high] = self.arr[high], self.arr[i + 1]
+        return i + 1
