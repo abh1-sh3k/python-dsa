@@ -99,8 +99,6 @@ class Sorting:
         """
         union of two sorted list
         prints non duplicated list
-        :param a: sorted list
-        :param b: sorted list
         """
         i, j = 0, 0
         while i < len(a) and j < len(b):
@@ -187,7 +185,7 @@ class Sorting:
     def lomuto(self, low, high):
         """
         takes first element as a pivot
-        pivot is returned.
+        pivot correct index is returned.
         we know pivot will get placed at it's correct position
         """
         pivot = self.arr[high]
@@ -198,3 +196,22 @@ class Sorting:
                 self.arr[i], self.arr[j] = self.arr[j], self.arr[i]
         self.arr[i + 1], self.arr[high] = self.arr[high], self.arr[i + 1]
         return i + 1
+
+    def hoare(self, low, high):
+        """
+        consider first element as pivot for partitioning the array
+        """
+        pivot = self.arr[low]
+        i = low - 1
+        j = high + 1
+        while True:
+            i += 1
+            while self.arr[i] < pivot:
+                i += 1
+            j -= 1
+            while self.arr[j] > pivot:
+                j -= 1
+            if i >= j:
+                return j
+            self.arr[i], self.arr[j] = self.arr[j], self.arr[i]
+
