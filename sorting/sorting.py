@@ -215,3 +215,8 @@ class Sorting:
                 return j
             self.arr[i], self.arr[j] = self.arr[j], self.arr[i]
 
+    def quick_sort(self, low, high):
+        if low < high:
+            partition = self.hoare(low, high)
+            self.quick_sort(low, partition)
+            self.quick_sort(partition + 1, high)
