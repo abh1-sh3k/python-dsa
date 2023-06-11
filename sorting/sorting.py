@@ -3,7 +3,7 @@ class Sorting:
     different sorting methods.
     Takes an array as input
     """
-
+    res = 0
     def __init__(self, arr: list[int]):
         """
         initialize an array
@@ -146,3 +146,39 @@ class Sorting:
                 print(a[i], end=" ")
                 i += 1
                 j += 1
+
+    def count_inv(self, left: int, right: int):
+        """
+        Where two elements a[i] and a[j] form an inversion if a[i] > a[j] and i < j.
+        """
+        res = 0
+        if left < right:
+            mid = (left + right) // 2
+            res += self.count_inv(left, mid)
+            res += self.count_inv(mid + 1, right)
+            res+=self.count_inv_merge(left, mid, right)
+        return res
+
+    def count_inv_merge(self, low, mid, high):
+        i, j, k = 0, 0, low
+        left = self.arr[low:mid + 1]
+        right = self.arr[mid + 1:high + 1]
+        res = 0
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                self.arr[k] = left[i]
+                i += 1
+            elif left[i] > right[j]:
+                self.arr[k] = right[j]
+                res += len(left) - i
+                j += 1
+            k += 1
+        while i < len(left):
+            self.arr[k] = left[i]
+            i += 1
+            k += 1
+        while j < len(right):
+            self.arr[k] = right[j]
+            k += 1
+            j += 1
+        return res
